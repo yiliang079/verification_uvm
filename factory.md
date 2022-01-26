@@ -1,5 +1,7 @@
 # factory
 
+[TOC]
+
 ## 管理测试案例的要求
 
 ------
@@ -44,11 +46,15 @@
 
    注：tr_da_3 必须由tr继承而来
 
+
+
 ## 创建create
 
 ------
 
 ![pic_ 2022-01-26 15.50.44.jpg](https://github.com/yiliang079/pic/blob/main/pic_%202022-01-26%2015.50.44.jpg?raw=true)
+
+
 
 ## 覆盖override
 
@@ -75,4 +81,49 @@ eg: `set_type_override_by_type(transaction::get_type(), transaction_da_3::get_ty
 
 <img src="https://github.com/yiliang079/pic/blob/main/pic_%202022-01-26%2015.54.25.jpg?raw=true" alt="pic_ 2022-01-26 15.54.25.jpg" style="zoom:33%;" />
 
-检查
+
+
+## 检查拓扑结构正确性
+
+------
+
+**uvm_top.print_topology()**
+
+​	可以放在final_phase中
+
+​	树形格式 uvm_top.print_topology( uvm_default_tree_printer )	
+
+**检查factory的替换**
+
+​	Factory.print()
+
+
+
+## 参数化的组件
+
+------
+
+**必须使用不同的宏定义来注册**
+
+```c++
+class new_driver #(width=9) extends uvm_driver #(transaction);
+	rand bit [width-1:0] data;
+	`uvm_component_param_utils_begin(new_driver #(width))
+    `uvm_field_int(data, UVM_DEFAULT)
+  `uvm_component_utils_end
+endclass
+```
+
+可以使用typedef来简化代码的编写
+
+typedef new_driver #() new_driver_type;
+
+<img src="https://github.com/yiliang079/pic/blob/main/pic_%202022-01-26%2016.29.42.jpg?raw=true" alt="pic_ 2022-01-26 16.29.42.jpg" style="zoom:33%;" />
+
+## 组件函数的最佳使用方法
+
+------
+
+​	利用派生的方式拓展组件的功能，使用小的虚方法实现类的操作，可以用多态来重载
+
+<img src="https://github.com/yiliang079/pic/blob/main/pic_%202022-01-26%2016.30.49.jpg?raw=true" alt="pic_ 2022-01-26 16.30.49.jpg" style="zoom:33%;" />
