@@ -141,6 +141,7 @@ class test_da_3_seq extends test_base;
 ```c++
 virtual function void build_phase(uvm_phase phase);
     packet_sequence::int_q_t valid_da = {3};
+
     super.build_phase(phase);
     `uvm_info("TRACE", $sformatf("%m"), UVM_HIGH);
     uvm_config_db#(packet_sequence::int_q_t)::set(this, "env.i_agt.sqr.packet_sequence", "valid_da", valid_da);
