@@ -2,7 +2,7 @@
 
 [yiliang079/verification_uvm: useless (github.com)](https://github.com/yiliang079/verification_uvm)
 
-一些学UVM的八股文笔记。
+一些学UVM的笔记。
 
 [TOC]
 
